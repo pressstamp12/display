@@ -6,19 +6,13 @@
     <title>File Viewer Google Drive</title>
     <link rel="stylesheet" href="styles.css">
     <style>
-        /* CSS tambahan untuk tampilan kiri-kanan */
         #file-container {
-            display: flex;
+            position: relative;
             width: 100vw;
             height: 100vh;
             overflow: hidden;
             margin: 0;
             padding: 0;
-        }
-
-        #file-display {
-            flex: 3; /* Alokasi ruang lebih besar untuk dokumen */
-            display: flex;
         }
 
         #file-display iframe {
@@ -28,34 +22,26 @@
         }
 
         #instruction {
-            flex: 1; /* Alokasi ruang untuk instruksi di kanan */
-            background: rgba(240, 240, 240, 0.9); /* Latar belakang abu-abu terang */
-            color: #333; 
-            padding: 20px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            padding: 10px;
+            border-radius: 5px;
             font-weight: bold;
-            overflow-y: auto; /* Agar teks bisa discroll jika panjang */
-            text-align: left;
-            box-sizing: border-box;
+            max-width: 90%;
+            text-align: center;
+            z-index: 10;
+            pointer-events: none;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Viewer File Berdasarkan Part Number</h1>
-        <label for="part-number">Pilih Part Number:</label>
-        <select id="part-number" onchange="showFile()">
-            <option value="">--Pilih Part Number--</option>
-            <!-- Opsi akan diisi secara dinamis -->
-        </select>
-        
-        <!-- Tempat untuk menampilkan file di kiri dan instruksi di kanan -->
-        <div id="file-container">
-            <div id="file-display"></div>
-            <div id="instruction"></div>
-        </div>
-        <div id="loading" style="display:none;">Memuat...</div>
+    <div id="file-container">
+        <div id="file-display"></div>
+        <div id="instruction"></div>
     </div>
-
     <script src="script.js"></script>
 </body>
 </html>
