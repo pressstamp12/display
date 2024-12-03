@@ -1,32 +1,33 @@
-<style>
-    #file-container {
-        position: relative;
-        display: flex;
-        justify-content: center; /* Pusatkan dokumen secara horizontal */
-        align-items: center; /* Pusatkan dokumen secara vertikal */
-        width: 100vw;
-        height: 100vh;
-        overflow: hidden;
-        background-color: #000;
-    }
+/* Tampilan utama untuk container */
+#file-container {
+    position: relative;
+    display: flex;
+    justify-content: center; /* Pusatkan dokumen secara horizontal */
+    align-items: center; /* Pusatkan dokumen secara vertikal */
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #000; /* Latar belakang hitam */
+}
 
-    #file-display iframe {
-        border: none;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Efek bayangan */
-    }
+/* Gaya untuk iframe */
+#file-display iframe {
+    border: none;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5); /* Efek bayangan */
+}
 
-    #instruction {
-        position: absolute;
-        top: 10px;
-        left: 10px;
-        background: rgba(0, 0, 0, 0.6);
-        color: #fff;
-        padding: 10px;
-        border-radius: 5px;
-        font-weight: bold;
-        max-width: 90%;
-        text-align: center;
-        z-index: 10;
-        pointer-events: none;
-    }
-</style>
+/* Gaya untuk pesan instruksi */
+#instruction {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: rgba(0, 0, 0, 0.6); /* Latar belakang transparan */
+    color: #fff;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: bold;
+    max-width: 90%;
+    text-align: center;
+    z-index: 10; /* Agar selalu di atas */
+    pointer-events: none; /* Tidak mengganggu interaksi */
+}
