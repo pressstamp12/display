@@ -13,7 +13,6 @@ body, html {
     user-select: none;
 }
 
-/* Susunan Vertikal: Banner di atas, Gambar di bawahnya (Tidak saling menimpa) */
 #file-container {
     position: relative;
     width: 100vw;
@@ -41,7 +40,7 @@ body, html {
     border-bottom: 3px solid #4ade80;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
     z-index: 20;
-    flex-shrink: 0; /* Mencegah banner mengecil */
+    flex-shrink: 0;
 }
 
 /* Efek Lampu Indikator Berkedip */
@@ -60,7 +59,7 @@ body, html {
     100% { transform: scale(0.9); opacity: 0.7; }
 }
 
-/* Area Dokumen Mengisi Sisa Ruang Layar Secara Otomatis */
+/* Area Dokumen Mengisi Sisa Ruang Layar */
 #file-display {
     flex: 1;
     width: 100%;
@@ -87,7 +86,7 @@ body, html {
     flex-shrink: 0;
 }
 
-/* Pelapis Penangkap Klik untuk Fullscreen */
+/* Pelapis Penangkap Klik 100% Transparan (Tanpa Teks) */
 #fullscreen-catcher {
     position: fixed;
     top: 0;
@@ -95,24 +94,7 @@ body, html {
     width: 100vw;
     height: 100vh;
     z-index: 9999;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
-    padding-bottom: 25px;
-    background: rgba(0, 0, 0, 0.05);
-}
-
-.fs-hint {
-    background: rgba(0, 0, 0, 0.85);
-    color: #4ade80;
-    padding: 10px 24px;
-    border-radius: 30px;
-    font-size: 1rem;
-    font-weight: bold;
-    border: 1px solid #4ade80;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.5);
-    animation: pulse 2s infinite;
+    background: transparent;
 }
 
 /* Notifikasi Error */
