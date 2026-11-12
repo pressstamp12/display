@@ -7,20 +7,25 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Pelapis penangkap klik agar klik di area gambar tetap memicu Fullscreen -->
+    <div id="fullscreen-catcher" title="Klik di mana saja untuk layar penuh">
+        <div class="fs-hint">KLIK DI MANA SAJA UNTUK MODE LAYAR PENUH (FULLSCREEN)</div>
+    </div>
+
     <div id="file-container">
-        <!-- Banner Status Sedang Produksi (Hanya muncul untuk Part Number) -->
+        <!-- Bar Atas "SEDANG PRODUKSI" (Tidak menimpa gambar) -->
         <div id="production-banner" class="hidden">
             <span class="pulse-dot"></span>
             <span id="production-text">SEDANG PRODUKSI</span>
         </div>
 
-        <!-- Keterangan Instruksi Tambahan (Kolom C) -->
-        <div id="instruction" class="hidden"></div>
-
         <!-- Area Tampilan File Google Drive -->
         <div id="file-display"></div>
 
-        <!-- Pesan Error / Status Jaringan (Pengganti Alert) -->
+        <!-- Keterangan Instruksi Tambahan (Kolom C) -->
+        <div id="instruction" class="hidden"></div>
+
+        <!-- Pesan Error / Status Jaringan -->
         <div id="error-toast" class="hidden"></div>
     </div>
 
