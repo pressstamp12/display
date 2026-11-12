@@ -7,13 +7,11 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Pelapis penangkap klik agar klik di area gambar tetap memicu Fullscreen -->
-    <div id="fullscreen-catcher" title="Klik di mana saja untuk layar penuh">
-        <div class="fs-hint">KLIK DI MANA SAJA UNTUK MODE LAYAR PENUH (FULLSCREEN)</div>
-    </div>
+    <!-- Pelapis transparan tanpa teks untuk memicu Fullscreen saat diklik -->
+    <div id="fullscreen-catcher"></div>
 
     <div id="file-container">
-        <!-- Bar Atas "SEDANG PRODUKSI" (Tidak menimpa gambar) -->
+        <!-- Bar Atas "SEDANG PRODUKSI" -->
         <div id="production-banner" class="hidden">
             <span class="pulse-dot"></span>
             <span id="production-text">SEDANG PRODUKSI</span>
