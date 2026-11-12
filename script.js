@@ -1,20 +1,20 @@
 const SPREADSHEET_ID = '1atuDQUwMD7lud9omrIBCUjPx6fb0TEj0XfwBKqaRllM';
 const API_KEY = 'AIzaSyBuqQ8CXTAcEvMvZpoqzz8f62zUWPCOb4M';
-const RANGE_PART_NUMBER = 'TR 800t!A:C'; // Kolom A (Part Number), B (ID File), C (Instruksi)
-const RANGE_E1 = 'TR 800t!E1'; // Sel Part Number / Aktivitas aktif
+const RANGE_PART_NUMBER = 'TR 800t!A:C';
+const RANGE_E1 = 'TR 800t!E1';
 
 // Daftar aktivitas yang TIDAK menampilkan tulisan "SEDANG PRODUKSI"
 const NON_PRODUCTION_ACTIVITIES = ['WATARI', 'DANDORI', 'TRIAL', 'TPM', 'KS1', 'KS2'];
 
 let previousPartNumber = null;
 
-// Fungsi untuk memaksa tampilan Full Screen
-function forceFullScreen() {
+// Fungsi untuk memaksa masuk ke Full Screen
+function enterFullScreen() {
     const elem = document.documentElement;
     if (!document.fullscreenElement && !document.webkitFullscreenElement) {
         if (elem.requestFullscreen) {
             elem.requestFullscreen().catch(() => {});
-        } else if (elem.webkitRequestFullscreen) { // Safari / Android WebView lama
+        } else if (elem.webkitRequestFullscreen) {
             elem.webkitRequestFullscreen();
         } else if (elem.msRequestFullscreen) {
             elem.msRequestFullscreen();
@@ -22,10 +22,24 @@ function forceFullScreen() {
     }
 }
 
-// Jalankan fullscreen saat halaman dimuat dan saat layar disentuh/diklik pertama kali
-window.addEventListener('load', forceFullScreen);
-document.addEventListener('click', forceFullScreen);
-document.addEventListener('touchstart', forceFullScreen);
+// Pantau perubahan status Full Screen untuk menyembunyikan/menampilkan pelapis klik
+function checkFullScreenState() {
+    const catcher = document.getElementById('fullscreen-catcher');
+    const isFull = document.fullscreenElement || document.webkitFullscreenElement || (window.innerHeight === screen.height);
+    if (isFull) {
+        catcher.classList.add('hidden');
+    } else {
+        catcher.classList.remove('hidden');
+    }
+}
+
+document.addEventListener('fullscreenchange', checkFullScreenState);
+document.addEventListener('webkitfullscreenchange', checkFullScreenState);
+window.addEventListener('resize', checkFullScreenState);
+
+// Saat pelapis diklik/disentuh di mana saja, langsung masuk Full Screen
+document.getElementById('fullscreen-catcher').addEventListener('click', enterFullScreen);
+document.getElementById('fullscreen-catcher').addEventListener('touchstart', enterFullScreen);
 
 async function fetchPartNumber() {
     const response = await fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${encodeURIComponent(RANGE_E1)}?key=${API_KEY}`);
@@ -60,13 +74,11 @@ async function updateDisplay() {
             return;
         }
 
-        // Jika tidak ada perubahan, lewati pembaruan iframe
         if (currentPartNumber === previousPartNumber) {
-            showError(null); // Bersihkan pesan error jika jaringan sudah normal kembali
+            showError(null);
             return;
         }
 
-        // Ambil database dan cari kecocokan
         const database = await fetchDatabase();
         const match = database.find(row => row[0] && row[0].trim().toUpperCase() === currentPartNumber.toUpperCase());
 
@@ -88,16 +100,14 @@ async function updateDisplay() {
             fileDisplay.appendChild(iframe);
         }
 
-        // 2. Atur kemunculan tulisan "SEDANG PRODUKSI"
+        // 2. Atur kemunculan bar atas "SEDANG PRODUKSI"
         const productionBanner = document.getElementById("production-banner");
         const productionText = document.getElementById("production-text");
         const isNonProduction = NON_PRODUCTION_ACTIVITIES.includes(currentPartNumber.toUpperCase());
 
         if (isNonProduction) {
-            // Sembunyikan jika aktivitas adalah WATARI, DANDORI, TRIAL, TPM, KS1, atau KS2
             productionBanner.classList.add("hidden");
         } else {
-            // Tampilkan jika merupakan Part Number
             productionText.textContent = `SEDANG PRODUKSI : ${currentPartNumber}`;
             productionBanner.classList.remove("hidden");
         }
@@ -111,7 +121,6 @@ async function updateDisplay() {
             instructionDisplay.classList.add("hidden");
         }
 
-        // Simpan status terbaru hanya setelah semua proses berhasil
         previousPartNumber = currentPartNumber;
         showError(null);
 
@@ -121,11 +130,9 @@ async function updateDisplay() {
     }
 }
 
-// Periksa perubahan setiap 5 detik
 setInterval(updateDisplay, 5000);
 
-// Panggil fungsi sekali saat halaman pertama kali dibuka
 window.onload = () => {
-    forceFullScreen();
+    checkFullScreenState();
     updateDisplay();
 };
