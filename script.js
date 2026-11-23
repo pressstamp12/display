@@ -1,7 +1,7 @@
 const SPREADSHEET_ID = '1atuDQUwMD7lud9omrIBCUjPx6fb0TEj0XfwBKqaRllM';
 const API_KEY = 'AIzaSyBuqQ8CXTAcEvMvZpoqzz8f62zUWPCOb4M';
-const RANGE_PART_NUMBER = 'TR 2000t!A:C'; // Kolom A (Part Number), B (ID Drive), C (Keterangan)
-const RANGE_LIVE_DATA = 'TR 2000t!E1:F7'; // E1 (Part/Aktivitas Aktif) + E2:F7 (Label & Angka Performance)
+const RANGE_PART_NUMBER = 'TR 800t!A:C'; // Kolom A (Part Number), B (ID Drive), C (Keterangan)
+const RANGE_LIVE_DATA = 'TR 800t!E1:F7'; // E1 (Part/Aktivitas Aktif) + E2:F7 (Label & Angka Performance)
 
 // Cadangan daftar aktivitas non-produksi jika kolom C kebetulan kosong
 const NON_PRODUCTION_ACTIVITIES = ['WATARI', 'DANDORI', 'TRIAL', 'TPM', 'KS1', 'KS2', '5S'];
